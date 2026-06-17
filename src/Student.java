@@ -32,20 +32,49 @@ public class Student {
         System.out.println(attendanceRecordList);
     }
 
-    public void viewAttendanceReport(Subject subject){
+    public double calculateAttendanceEachSubject(Subject subject){
         double subjectLectureOccur = 0;
         double subjectLecturePresent = 0;
+        double subjectAttendance = 0;
         for(AttendanceStatus status : attendanceRecordList){
-            if(status.getSubject() == subject){
+            if(status.getSubject().equals(subject)){
                 subjectLectureOccur++;
             }
-            if(status.getSubject()==subject &&  status.isPresent() == true){
+            if(status.getSubject().equals(subject) &&  status.isPresent()){
                 subjectLecturePresent++;
             }
         }
+        if(subjectLectureOccur==0){
+            System.out.println(subject + ": No attendance records available.");
+        }
+        else {
+            subjectAttendance = (subjectLecturePresent/subjectLectureOccur)*100;
+        }
+        return subjectAttendance;
+    }
 
-        double subjectAttendance = (subjectLecturePresent/subjectLectureOccur)*100;
-        System.out.println(subjectAttendance);
+    public void viewAttendanceReport(){
+        double subjectAttendance = 0;
 
+        for(Subject subject : subjectList){
+             subjectAttendance = calculateAttendanceEachSubject(subject);
+             System.out.println(subject + ": " + subjectAttendance);
+        }
+
+        double overallLectureOccur = 0;
+        double overallLecturePresent = 0;
+        for(AttendanceStatus  status : attendanceRecordList){
+                overallLectureOccur++;
+            if(status.isPresent()){
+                overallLecturePresent++;
+            }
+        }
+        if(overallLectureOccur==0){
+            System.out.println("No attendance Report available.");
+        }
+        else{
+            double totalAttendance = (overallLecturePresent/overallLectureOccur)*100;
+            System.out.println(totalAttendance);
+        }
     }
 }

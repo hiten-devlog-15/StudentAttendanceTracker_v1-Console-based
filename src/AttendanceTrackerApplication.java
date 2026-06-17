@@ -45,7 +45,7 @@ public class AttendanceTrackerApplication {
         AttendanceStatus attendanceStatus = new AttendanceStatus(date, subject, present);
         s1.addAttendanceRecord(attendanceStatus);
 
-        s1.viewAttendanceReport(subject);
+        s1.viewAttendanceReport();
 
 
     }
