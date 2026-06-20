@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Student {
     private String name;
@@ -9,7 +10,11 @@ public class Student {
     private ArrayList<TimetableEntry> timetableEntryList = new ArrayList<>();//Each student object has its own timetableEntries(Ex. Monday-10am-Java)
     private ArrayList<AttendanceStatus> attendanceRecordList = new ArrayList<>();//Each student object will have its own attendanceRecord
     // Ex. 10th June - OS - present
-
+    Scanner sc = new Scanner(System.in);
+    public Subject getSubjectAtIndex(){
+        int i = sc.nextInt();
+        return subjectList.get(i);
+    }
     Student(String name, int rollNumber, String division, String year) {
         this.name = name;
         this.rollNumber = rollNumber;
@@ -30,8 +35,8 @@ public class Student {
         }
     }
 
-    public ArrayList<Subject> viewSubject(){
-        return subjectList;
+    public void viewSubjects(){
+        System.out.println(subjectList);
     }
 
     public void createTimetable(TimetableEntry timetableEntry){
@@ -39,6 +44,7 @@ public class Student {
     }
 
     public void addAttendanceRecord(AttendanceStatus attendanceStatus){
+
         attendanceRecordList.add(attendanceStatus);
     }
 
