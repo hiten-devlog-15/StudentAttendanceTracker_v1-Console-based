@@ -18,18 +18,28 @@ public class Student {
     }
 
     public void addSubject(Subject subject) {
-        subjectList.add(subject);
-        System.out.println(subjectList);
+        boolean duplicateFound = false;
+        for (Subject eachSubject : subjectList){
+            if(subject.getName().toUpperCase().equals(eachSubject.getName().toUpperCase())){
+                duplicateFound = true;
+                break;
+            }
+        }
+        if (duplicateFound == false){
+            subjectList.add(subject);
+        }
+    }
+
+    public ArrayList<Subject> viewSubject(){
+        return subjectList;
     }
 
     public void createTimetable(TimetableEntry timetableEntry){
         timetableEntryList.add(timetableEntry);
-        System.out.println(timetableEntryList);
     }
 
     public void addAttendanceRecord(AttendanceStatus attendanceStatus){
         attendanceRecordList.add(attendanceStatus);
-        System.out.println(attendanceRecordList);
     }
 
     public double calculateAttendanceEachSubject(Subject subject){
@@ -45,7 +55,7 @@ public class Student {
             }
         }
         if(subjectLectureOccur==0){
-            System.out.println(subject + ": No attendance records available.");
+
         }
         else {
             subjectAttendance = (subjectLecturePresent/subjectLectureOccur)*100;
@@ -74,7 +84,7 @@ public class Student {
         }
         else{
             double totalAttendance = (overallLecturePresent/overallLectureOccur)*100;
-            System.out.println(totalAttendance);
+            System.out.println("Overall Attendance: " + totalAttendance);
         }
     }
 }

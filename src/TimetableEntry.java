@@ -1,6 +1,3 @@
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 public class TimetableEntry {
     private String time;
     private String dayOfWeek;
