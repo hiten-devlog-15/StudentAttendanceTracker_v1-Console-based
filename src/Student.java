@@ -52,7 +52,15 @@ public class Student {
         timetableEntryList.add(timetableEntry);
     }
 
-    public void addAttendanceRecord(AttendanceStatus    attendanceStatus){
+    public void viewTimetable(){
+        for(int i = 0; i<timetableEntryList.size(); i++){
+            System.out.println(timetableEntryList.get(i).getDayOfWeek() + "-" + timetableEntryList.get(i).getTime()
+            + "-" + timetableEntryList.get(i).getSubject().getName());
+        }
+
+    }
+
+    public void addAttendanceRecord(AttendanceStatus attendanceStatus){
         attendanceRecordList.add(attendanceStatus);
     }
 
