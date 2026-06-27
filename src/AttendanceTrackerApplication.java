@@ -91,7 +91,7 @@ public class AttendanceTrackerApplication {
                     break;
 
                 case 5:
-                    if (student.getSubjectList().size() == 0) {
+                    if (student.getSubjectList().isEmpty()) {
                         System.out.println("Please add a subject first.");
                         break;
                     } else {
