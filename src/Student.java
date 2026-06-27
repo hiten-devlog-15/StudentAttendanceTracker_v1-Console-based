@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Student {
     private String name;
@@ -10,11 +9,19 @@ public class Student {
     private ArrayList<TimetableEntry> timetableEntryList = new ArrayList<>();//Each student object has its own timetableEntries(Ex. Monday-10am-Java)
     private ArrayList<AttendanceStatus> attendanceRecordList = new ArrayList<>();//Each student object will have its own attendanceRecord
     // Ex. 10th June - OS - present
-    Scanner sc = new Scanner(System.in);
-    public Subject getSubjectAtIndex(){
-        int i = sc.nextInt();
-        return subjectList.get(i);
+
+
+    public ArrayList<Subject> getSubjectList(){
+        return subjectList;
     }
+
+    public void showSubjects(){
+        for(int i = 0; i<subjectList.size(); i++){
+            System.out.println(i + ": " +subjectList.get(i));
+        }
+    }
+
+
     Student(String name, int rollNumber, String division, String year) {
         this.name = name;
         this.rollNumber = rollNumber;
@@ -24,14 +31,16 @@ public class Student {
 
     public void addSubject(Subject subject) {
         boolean duplicateFound = false;
-        for (Subject eachSubject : subjectList){
-            if(subject.getName().toUpperCase().equals(eachSubject.getName().toUpperCase())){
+        for(Subject eachSubject : subjectList){
+            if(eachSubject.getName().toUpperCase().equals(subject.getName().toUpperCase())){
                 duplicateFound = true;
+                System.out.println("This subject is already added.");
                 break;
             }
         }
-        if (duplicateFound == false){
+        if(!duplicateFound){
             subjectList.add(subject);
+
         }
     }
 
@@ -43,8 +52,7 @@ public class Student {
         timetableEntryList.add(timetableEntry);
     }
 
-    public void addAttendanceRecord(AttendanceStatus attendanceStatus){
-
+    public void addAttendanceRecord(AttendanceStatus    attendanceStatus){
         attendanceRecordList.add(attendanceStatus);
     }
 
@@ -61,7 +69,7 @@ public class Student {
             }
         }
         if(subjectLectureOccur==0){
-
+            subjectAttendance = -1;
         }
         else {
             subjectAttendance = (subjectLecturePresent/subjectLectureOccur)*100;
@@ -74,7 +82,12 @@ public class Student {
 
         for(Subject subject : subjectList){
              subjectAttendance = calculateAttendanceEachSubject(subject);
-             System.out.println(subject + ": " + subjectAttendance);
+             if(subjectAttendance == -1){
+                 System.out.println(subject + ": No Lectures Occured");
+             }
+             else {
+                 System.out.println(subject + ": " + subjectAttendance);
+             }
         }
 
         double overallLectureOccur = 0;

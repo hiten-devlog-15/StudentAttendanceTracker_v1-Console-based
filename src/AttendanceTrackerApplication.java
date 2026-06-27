@@ -28,15 +28,15 @@ public class AttendanceTrackerApplication {
             System.out.println("5. Exit");
 
             int choice = sc.nextInt();
-            Subject subject = new Subject(studentName); //As subject is required for multiple cases we cant declare it inside any case.
+             //As subject is required for multiple cases we cant declare it inside any case.
             //As this will reduce the scope of our object reference.
 
             switch (choice){
                 case 1:
                     System.out.println("Enter Subject Name");
                     String subjectName = sc.next();
+                    Subject subject = new Subject(subjectName.toUpperCase());
                     student.addSubject(subject);
-
                     break;
 
                 case 2:
@@ -44,18 +44,38 @@ public class AttendanceTrackerApplication {
                     break;
 
                 case 3:
-                    System.out.println("Enter Date");
-                    String date = sc.next();
-                    System.out.println("Present = true & Absent = false");
-                    boolean present = sc.nextBoolean();
-                    System.out.println("Enter subject index");
-
-                    Subject subjectInList = student.getSubjectAtIndex().get(i);
-                    AttendanceStatus attendanceStatus = new AttendanceStatus(date, subjectInList, present);
-                    if(student.getSubjectAtIndex().){
-                        System.out.println("Add a subject First");
+                    if(student.getSubjectList().size() == 0){
+                        System.out.println("Please add a subject first.");
+                        break;
+                    }else{
+                        student.showSubjects();
+                        System.out.println("Enter Subject index");
+                        int n = sc.nextInt();
+                        if(n>=0 && n<student.getSubjectList().size()){
+                            Subject choosenSubject = student.getSubjectList().get(n);
+                            System.out.println("Enter Date");
+                            String date = sc.next();
+                            System.out.println("Present = true & Absent = false");
+                            boolean present = sc.nextBoolean();
+                            AttendanceStatus attendanceStatus = new AttendanceStatus(date, choosenSubject, present);
+                            student.addAttendanceRecord(attendanceStatus);
+                        }else {
+                            System.out.println("Please enter a correct index.");
+                        }
                     }
-                    student.addAttendanceRecord(attendanceStatus);
+//
+
+//                    int i = sc.nextInt();
+//                    Subject subjectInList = null;
+//                    if(student.getSubjectAtIndex(i) == null){
+//                        System.out.println("Please add a Subject first");
+//                    }
+//                    else{
+//                         subjectInList = student.getSubjectAtIndex(i);
+//                    }
+//
+//
+
                     break;
 
                 case 4:
@@ -132,3 +152,15 @@ public class AttendanceTrackerApplication {
 //       }
     }
 }
+
+
+/*
+1. addSubject() bug
+2. Add Attendance when no subjects exist
+3. Invalid index handling
+4. Remove Scanner from Student
+5. Improve subject selection UI
+6. Improve encapsulation
+7. Improve attendance reporting
+ */
+
